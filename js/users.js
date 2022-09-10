@@ -1,7 +1,18 @@
 const tableBody = document.getElementById("tableBody");
 const fetchUsers = async () => {
+    const token = JSON.parse(localStorage.getItem("token"))
+    const loggedInUser = JSON.parse(localStorage.getItem("user"))
+    const role = loggedInUser.role
     try {
-        const response = await fetch("http://localhost:5000/fetchUsers");
+        const response = await fetch("http://localhost:5000/fetchUsers",{
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "authorization":`Bearer ${token}`,
+                "role": `${role}`
+            },
+        });
         const result = await response.json();
         if (response.status === 200) {
             return result.users;
@@ -12,14 +23,23 @@ const fetchUsers = async () => {
 };
 fetchUsers()
     .then((users) => {
-        console.log(users);
-        users.forEach((user, i) => {
-            tableBody.innerHTML += getTableBody(user._id, user.email, i + 1);
-        });
+        const loggedInUser = JSON.parse(localStorage.getItem("user"))
+        if(loggedInUser.role !=="admin"){
+            tableBody.innerHTML = `<tr class="mt-5" ><p class="text-red-500 font-bold text center">You don't have permission to see users list</p></tr>`
+        }else{
+            users.forEach((user, i) => {
+                tableBody.innerHTML += getTableBody(user._id, user.email, i + 1);
+            });
+        }
+        
     })
     .catch((error) => console.log(error));
 
 async function deleteUser(email, userId) {
+    const token = JSON.parse(localStorage.getItem("token"))
+    const loggedInUser = JSON.parse(localStorage.getItem("user"))
+    const role = loggedInUser.role
+
     if(email === "admin@admin.com"){
         alert('admin can not be deleted')
         return
@@ -32,6 +52,8 @@ async function deleteUser(email, userId) {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
+                "authorization":`Bearer ${token}`,
+                "role": `${role}`
             },
         });
         const result = response.json()
