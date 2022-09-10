@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../dist/output.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <main class="h-[100vh] bg-gray-100">
+            <!-- navigation bar -->
+            <nav
+                class="bg-gray-200 py-2 flex items-center justify-between px-2"
+            >
+                <h4 class="text-red-400 font-bold">Worker Analysis</h4>
+                <ul>
+                    <li class="list-none">
+                        <a
+                            href="./index.html"
+                            class="font-medium text-indigo-600 hover:text-indigo-500"
+                            >Home page</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+            <!-- Users Table -->
+
+            <div class="overflow-x-auto relative p-5">
+                <table
+                    class="w-3/4 mx-auto text-sm text-left text-gray-500 dark:text-gray-400"
+                >
+                    <thead
+                        class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400"
+                    >
+                        <tr>
+                            <th scope="col" class="py-3 px-6">Serial</th>
+                            <th scope="col" class="py-3 px-6">User Email</th>
+                            <th scope="col" class="py-3 px-6">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- this will be populated by script(users.js) -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <script src="../js/users.js"></script>
+    </body>
+</html>

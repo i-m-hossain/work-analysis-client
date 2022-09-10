@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../dist/output.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <main class="h-[100vh] bg-gray-100">
+            <!-- Navigation bar -->
+            <nav class="bg-gray-200 py-2 flex items-center justify-between px-2">
+                <h4 class="text-red-400 font-bold">Worker Analysis</h4>
+                <ul>
+                    <li class="list-none"><a href="./users.html" class="font-medium text-indigo-600 hover:text-indigo-500">Manage users</a></li>
+                </ul>
+            </nav>
+            <!-- Chart -->
+            <section class="w-3/4 mx-auto">
+                <canvas id="myChart"></canvas>
+            </section>
+        </main>
+        <script src="../js/index.js"></script>
+    </body>
+</html>
