@@ -9,15 +9,48 @@
     <body>
         <main class="h-[100vh] bg-gray-100">
             <!-- Navigation bar -->
-            <nav class="bg-gray-200 py-2 flex items-center justify-between px-2">
+            <nav
+                class="bg-gray-200 py-2 flex items-center justify-between px-2"
+            >
                 <h4 class="text-red-400 font-bold">Worker Analysis</h4>
                 <ul>
-                    <li class="list-none"><a href="./users.html" class="font-medium text-indigo-600 hover:text-indigo-500">Manage users</a></li>
+                    <li class="list-none">
+                        <a
+                            href="./users.html"
+                            class="font-medium text-indigo-600 hover:text-indigo-500"
+                            >Manage users</a
+                        >
+                    </li>
                 </ul>
             </nav>
-            <!-- Chart -->
-            <section class="w-3/4 mx-auto">
-                <canvas id="myChart"></canvas>
+            <section class="flex justify-center space-x-4">
+                <!-- upload file -->
+                <div class="border-r-2 border-slate-200 p-4">
+                    <div class="mb-4">
+                        <label for="password" class="sr-only">File</label>
+                        <input
+                            id="file"
+                            name="file"
+                            type="file"
+                            required
+                            class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <button
+                            type="submit"
+                            class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            id="loginButton"
+                            onclick="photoUpload(event)"
+                        >
+                            Upload File
+                        </button>
+                    </div>
+                </div>
+                <!-- Chart -->
+                <div class="w-3/4 mx-auto">
+                    <canvas id="myChart"></canvas>
+                </div>
             </section>
         </main>
         <script src="../js/index.js"></script>

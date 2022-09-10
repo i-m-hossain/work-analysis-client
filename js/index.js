@@ -1,5 +1,28 @@
-//configuring chart
+//uploading data
+async function photoUpload(event) {
+    event.preventDefault()
+    var input = document.querySelector('input[type="file"]')
 
+    var data = new FormData()
+    data.append('file', input.files[0])
+    console.log(data)
+    try {
+        const response = await fetch("http://localhost:5000/upload-data", {
+            method: "POST",
+            body: data,
+        });
+        const result = await response.json()
+        console.log({result, status: response.status});
+        alert('file is uploaded')
+    } catch (error) {
+        console.log(error);
+    }
+    
+};
+
+
+
+//configuring chart
 const worker_count = [
     "January",
     "February",
