@@ -1,26 +1,35 @@
 //uploading data
-async function photoUpload(event) {
-    event.preventDefault()
-    var input = document.querySelector('input[type="file"]')
+async function fileUpload(event) {
+    event.preventDefault();
+    var input = document.querySelector('input[type="file"]');
+    var data = new FormData();
+    data.append("file", input.files[0]);
 
-    var data = new FormData()
-    data.append('file', input.files[0])
-    console.log(data)
-    try {
-        const response = await fetch("http://localhost:5000/upload-data", {
-            method: "POST",
-            body: data,
-        });
-        const result = await response.json()
-        console.log({result, status: response.status});
-        alert('file is uploaded')
-    } catch (error) {
-        console.log(error);
+    if (input.files[0]) {
+        try {
+            const response = await fetch("http://localhost:5000/upload-data", {
+                method: "POST",
+                body: data,
+            });
+            const result = await response.json();
+            console.log({ result, status: response.status });
+            alert("file is uploaded");
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        alert("please select a file");
     }
-    
-};
+}
 
-
+/* const result = fetch("http://localhost:5000/worker_count")
+    .then((res) => res.json())
+    .then((result) => {
+        result.forEach((element) => {
+            worker_count.push(element.worker_count);
+            time.push(element.datetime.hour);
+        });
+    }); */
 
 //configuring chart
 const worker_count = [
@@ -31,6 +40,7 @@ const worker_count = [
     "May",
     "June",
 ];
+
 const data = {
     labels: worker_count,
     datasets: [
@@ -47,7 +57,4 @@ const config = {
     data: data,
     options: {},
 };
-const myChart = new Chart(
-    document.getElementById("myChart"),
-    config
-);
+const myChart = new Chart(document.getElementById("myChart"), config);
