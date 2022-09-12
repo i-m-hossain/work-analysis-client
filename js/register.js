@@ -18,8 +18,10 @@ form.addEventListener("submit", async (e) => {
         //if registration is successful, user will be redirected to login page
         if(response.status === 201){
             window.location.href = '../src/login.html';
+        }else{
+            document.getElementById('error').textContent="server error! couldn't register"
         }
     } catch (error) {
-        console.log(error);
+        document.getElementById('error').textContent="server error! couldn't register"
     }
 });

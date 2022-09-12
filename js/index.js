@@ -1,4 +1,11 @@
 const logoutButton = document.getElementById("logout")//uploading data
+const handleLogoutButton=()=>{
+    const user= localStorage.getItem('user')
+    if(!user){
+        logoutButton.remove()
+    }
+}
+handleLogoutButton()
 async function fileUpload(event) {
     event.preventDefault();
     var input = document.querySelector('input[type="file"]');
@@ -63,7 +70,7 @@ fetchWorkerCount().then(res=> {
 
 })
 
-document.getElementById("logout").addEventListener('click',()=>{
+logoutButton.addEventListener('click',()=>{
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     location.replace("../src/login.html");

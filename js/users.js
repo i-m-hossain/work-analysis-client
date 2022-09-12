@@ -1,4 +1,21 @@
 const tableBody = document.getElementById("tableBody");
+const logoutButton = document.getElementById("logout")
+
+//if no user is found logout button should not be present
+const handleLogoutButton=()=>{
+    const user= localStorage.getItem('user')
+    if(!user){
+        logoutButton.remove()
+    }
+}
+const handleUserListMessage=()=>{
+    if(!localStorage.getItem('user')){
+        tableBody.innerHTML = `<tr class="mt-5" ><p class="text-red-500 font-bold text center">You don't have permission to see users list</p></tr>`
+    }
+}
+handleLogoutButton()
+handleUserListMessage()
+//fetching users
 const fetchUsers = async () => {
     const token = JSON.parse(localStorage.getItem("token"))
     const loggedInUser = JSON.parse(localStorage.getItem("user"))
@@ -24,13 +41,14 @@ const fetchUsers = async () => {
 fetchUsers()
     .then((users) => {
         const loggedInUser = JSON.parse(localStorage.getItem("user"))
-        if(!loggedInUser || loggedInUser.role !=="admin"){
+        if(loggedInUser.role !=="admin"){
             tableBody.innerHTML = `<tr class="mt-5" ><p class="text-red-500 font-bold text center">You don't have permission to see users list</p></tr>`
         }else{
             users.forEach((user, i) => {
                 tableBody.innerHTML += getTableBody(user._id, user.email, i + 1);
             });
         }
+        
         
     })
     .catch((error) => console.log(error));
@@ -66,7 +84,7 @@ async function deleteUser(email, userId) {
         console.log(error);
     }
 }
-document.getElementById("logout").addEventListener('click',()=>{
+logoutButton.addEventListener('click',()=>{
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     location.replace("../src/login.html");

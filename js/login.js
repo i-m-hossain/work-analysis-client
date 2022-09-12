@@ -20,8 +20,10 @@ form.addEventListener("submit", async (e) => {
             localStorage.setItem('token',JSON.stringify(result.token) )
             localStorage.setItem('user',JSON.stringify({email:result.email, role: result.role}) )
             window.location.href = '../src/index.html';
+        }else{
+            document.getElementById('error').textContent="email or password not matched!"
         }
     } catch (error) {
-        console.log(error);
+        document.getElementById('error').textContent="server error! couldn't login"
     }
 });
