@@ -21,34 +21,25 @@ async function fileUpload(event) {
         alert("please select a file");
     }
 }
-
-/* const result = fetch("http://localhost:5000/worker_count")
-    .then((res) => res.json())
-    .then((result) => {
-        result.forEach((element) => {
-            worker_count.push(element.worker_count);
-            time.push(element.datetime.hour);
-        });
-    }); */
-
-//configuring chart
-const worker_count = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-];
-
+async function fetchWorkerCount(){
+    try{
+        const result = await fetch("http://localhost:5000/worker-count")
+        return await result.json()
+    }catch(err){
+        console.log(err);
+        return err
+    }
+}
+let time=[]
+let worker_count=[]
 const data = {
-    labels: worker_count,
+    labels: time,
     datasets: [
         {
             label: "Worker count analysis",
             backgroundColor: "rgb(255, 99, 132)",
             borderColor: "rgb(255, 99, 132)",
-            data: [0, 10, 5, 2, 20, 30, 45], //time
+            data: worker_count, //time
         },
     ],
 };
@@ -57,4 +48,25 @@ const config = {
     data: data,
     options: {},
 };
-const myChart = new Chart(document.getElementById("myChart"), config);
+fetchWorkerCount().then(res=> {
+    console.log("graph data",res);
+    res.workers.forEach(item=>{
+        worker_count.push(item.worker_count)
+        time.push(item.datetime.hour)
+    })
+    const myChart = new Chart(document.getElementById("myChart"), config);
+
+})
+
+//configuring chart
+// const worker_count = [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+// ];
+
+
+
