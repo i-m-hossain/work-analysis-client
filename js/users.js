@@ -24,7 +24,7 @@ const fetchUsers = async () => {
 fetchUsers()
     .then((users) => {
         const loggedInUser = JSON.parse(localStorage.getItem("user"))
-        if(loggedInUser.role !=="admin"){
+        if(!loggedInUser || loggedInUser.role !=="admin"){
             tableBody.innerHTML = `<tr class="mt-5" ><p class="text-red-500 font-bold text center">You don't have permission to see users list</p></tr>`
         }else{
             users.forEach((user, i) => {
