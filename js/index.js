@@ -1,4 +1,4 @@
-//uploading data
+const logoutButton = document.getElementById("logout")//uploading data
 async function fileUpload(event) {
     event.preventDefault();
     var input = document.querySelector('input[type="file"]');
@@ -14,6 +14,11 @@ async function fileUpload(event) {
             const result = await response.json();
             console.log({ result, status: response.status });
             alert("file is uploaded");
+            if(response.status === 200){
+                setTimeout(()=>{
+                    location.reload()
+                },65000)
+            }
         } catch (error) {
             console.log(error);
         }
@@ -54,19 +59,16 @@ fetchWorkerCount().then(res=> {
         worker_count.push(item.worker_count)
         time.push(item.datetime.hour)
     })
-    const myChart = new Chart(document.getElementById("myChart"), config);
+    new Chart(document.getElementById("myChart"), config);
 
 })
 
-//configuring chart
-// const worker_count = [
-//     "January",
-//     "February",
-//     "March",
-//     "April",
-//     "May",
-//     "June",
-// ];
+document.getElementById("logout").addEventListener('click',()=>{
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    location.replace("../src/login.html");
+})
+
 
 
 

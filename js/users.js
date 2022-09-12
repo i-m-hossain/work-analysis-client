@@ -66,6 +66,11 @@ async function deleteUser(email, userId) {
         console.log(error);
     }
 }
+document.getElementById("logout").addEventListener('click',()=>{
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    location.replace("../src/login.html");
+})
 function getTableBody(id, email, index) {
     return `<tr
     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
