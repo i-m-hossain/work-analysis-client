@@ -20,7 +20,7 @@ async function fileUpload(event) {
             });
             const result = await response.json();
             console.log({ result, status: response.status });
-            alert("file is uploaded");
+            alert("file is uploaded, wait 1 min for reload");
             if(response.status === 200){
                 setTimeout(()=>{
                     location.reload()
